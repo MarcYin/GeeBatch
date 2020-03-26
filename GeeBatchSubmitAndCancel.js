@@ -44,6 +44,30 @@ function click2(item, index) {
 function click3(item, index) {
   item.children[3].click();
 }
+
+function click_ok(){
+    var ok = Array.from(document.getElementsByClassName('goog-buttonset-default goog-buttonset-action'));
+    ok.forEach(click2);
+}
+function whenAvailable(callback) {
+    var interval = 10; // ms
+    var assets = document.getElementsByClassName('asset-id-root-select')
+    var loaded = 0
+    for (var i = 0; i < assets.length; i++) {
+        if (assets[i].textContent.includes("users/")){
+            loaded += 1
+            console.log(assets[i].textContent)
+        }
+    }
+    setTimeout(function() {
+        if (loaded>assets.length-1) {
+            callback();
+        } else {
+            setTimeout(whenAvailable(callback), interval);
+        }
+    }, interval);
+}
+
 // submit
 function submit() {
   var tasks1 = Array.from(document.getElementsByClassName('task local type-EXPORT_IMAGE awaiting-user-config'));
@@ -51,13 +75,13 @@ function submit() {
   var tasks = tasks1.concat(tasks2)
   // console.log(tasks)
   tasks.forEach(click1);
-  setTimeout(function () {
-      var assets = Array.from(document.getElementsByClassName('asset-id-root-select'))
-      var loaded = assets.forEach(function(item, index){return item.textContent})
-      console.log(loaded)
-      var ok = Array.from(document.getElementsByClassName('goog-buttonset-default goog-buttonset-action'));
-      ok.forEach(click2);
-    }, 10000)
+  var assets = document.getElementsByClassName('asset-id-root-select')
+  if (assets.length > 0) {
+      whenAvailable(click_ok)
+  }else{
+      click_ok()
+  }
+
 } // end of function
 
 // cancel running
@@ -69,8 +93,7 @@ function cancel_running() {
     var tasks = tasks1.concat(tasks2).concat(tasks3).concat(tasks4);
     tasks.forEach(click3);
     // console.log(tasks)
-    var ok = Array.from(document.getElementsByClassName('goog-buttonset-default goog-buttonset-action'));
-    ok.forEach(click2);
+    click_ok()
 } // end of function
 
 // cancel unrunning
@@ -82,8 +105,7 @@ function cancel() {
     var tasks = tasks1.concat(tasks2).concat(tasks3).concat(tasks4);
     tasks.forEach(click3);
     // console.log(tasks)
-    var ok = Array.from(document.getElementsByClassName('goog-buttonset-default goog-buttonset-action'));
-    ok.forEach(click2);
+    click_ok()
 } // end of function
 
 
