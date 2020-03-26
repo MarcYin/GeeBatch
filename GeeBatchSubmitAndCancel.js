@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name GeeBatchSubmitAndCancel
 // @description GEE batch submit and cancel
-// @version 1.0
+// @version 1.1
 // @updateURL https://raw.githubusercontent.com/MarcYin/GeeBatch/master/GeeBatchSubmitAndCancel.js
 // @author Marc Yin
 // @license GNU GENERAL PUBLIC LICENSE V3
