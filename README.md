@@ -8,7 +8,7 @@ It uses user script to add buttons into GEE code editor, which are used to batch
 
 ## Requirements:
 
-* [Tampermonkey]([https://www.tampermonkey.net/](https://www.tampermonkey.net/)) extension
+* [Tampermonkey](https://www.tampermonkey.net) extension
 * [GeeBatchSubmitAndCancel.js](https://raw.githubusercontent.com/MarcYin/GeeBatch/master/GeeBatchSubmitAndCancel.js)
 
 ## Usage:
