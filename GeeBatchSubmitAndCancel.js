@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name GeeBatchSubmitAndCancel
 // @description GEE batch submit and cancel
-// @version 1.2
+// @version 1.3
 // @updateURL https://raw.githubusercontent.com/MarcYin/GeeBatch/master/GeeBatchSubmitAndCancel.js
 // @author Marc Yin
 // @license GNU GENERAL PUBLIC LICENSE V3
@@ -76,30 +76,34 @@ function clickPublic(){
   var tasks = Array.from(document.getElementsByClassName('is-public-checkbox'));
   // console.log(tasks)
   tasks.forEach(click4);
+  setTimeout(whenDoneAvailable, 1000, clickDone);
 }
 
 function whenAclAvailable(acl_list, callback) {
     var interval = 10; // ms
-    var assets = document.getElementsByClassName('is-public-checkbox')
+    var dialogs = document.getElementsByClassName('modal-dialog asset-sharing-dialog')
+    // var assets = document.getElementsByClassName('is-public-checkbox')
     setTimeout(function() {
-        if (assets.length == acl_list.length) {
+        if (dialogs.length == acl_list.length) {
+            console.log(dialogs)
             callback();
         } else {
-            // console.log(assets)
             setTimeout(whenAclAvailable(acl_list, callback), interval);
         }
     }, interval);
 }
 
 
-function whenDoneAvailable(acl_list, callback) {
+function whenDoneAvailable(callback) {
     var interval = 10; // ms
-    var assets = document.getElementsByClassName('modal-dialog-buttons')
+    var loadings = document.getElementsByClassName('modal-dialog asset-sharing-dialog loading')
+    // console.log(loadings)
     setTimeout(function() {
-        if (assets.length == acl_list.length) {
+        if (loadings.length == 0) {
             callback();
         } else {
-            setTimeout(whenDoneAvailable(acl_list, callback), interval);
+            // console.log(loadings)
+            setTimeout(whenDoneAvailable(callback), interval);
         }
     }, interval);
 }
@@ -147,6 +151,7 @@ function cancel() {
     var tasks3 = Array.from(document.getElementsByClassName('task local type-EXPORT_FEATURES submitted-to-backend'));
     var tasks4 = Array.from(document.getElementsByClassName('task remote type-EXPORT_FEATURES submitted-to-backend'));
     var tasks = tasks1.concat(tasks2).concat(tasks3).concat(tasks4);
+
     tasks.forEach(click3);
     // console.log(tasks)
     click_ok()
@@ -156,17 +161,26 @@ function cancel() {
 function changeACL() {
   var asset_name = document.getElementById("SearchBar").value;
   console.log(asset_name);
-  var tasks = document.getElementsByClassName('tree-item tree-file file-type-image');
+  // var tasks1 = document.getElementsByClassName('tree-item tree-file file-type-image');
+  // var tasks2 = document.getElementsByClassName('tree-item tree-file file-type-table');
+  // var tasks3 = document.getElementsByClassName('tree-item tree-file file-type-image-collection');
+  // var tasks = tasks1.concat(tasks2).concast(tasks3)
+
+  // var roots = document.getElementsByClassName('tree-item tree-folder tree-root');
+  // var assets = roots[roots.length-1].firstChild.children;
+
+  var am = document.getElementsByClassName('tree-manager asset-manager')[0];
+  var assets = am.getElementsByClassName('tree-item tree-folder tree-root')[0].firstChild.children;
   var acl_list = []
-  for (var i = 0; i < tasks.length; i++){
-        if(tasks[i].textContent.includes(asset_name)){
-            tasks[i].children[2].click()
-            acl_list.push(tasks[i])
-            console.log(tasks[i])
+  for (var i = 0; i < assets.length; i++){
+        if(assets[i].textContent.includes(asset_name)){
+            assets[i].children[2].click()
+            acl_list.push(assets[i])
+            console.log(assets[i])
         }
     };
   whenAclAvailable(acl_list, clickPublic);
-  whenDoneAvailable(acl_list, clickDone);
+
 };
 
 
