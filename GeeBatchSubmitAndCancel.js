@@ -81,7 +81,7 @@ function clickPublic(){
   tasks.forEach(click4);
   setTimeout(whenDoneAvailable, 1000, clickDone);
 }
-
+// adapted from https://stackoverflow.com/questions/8618464/how-to-wait-for-another-js-to-load-to-proceed-operation by Wayne
 function whenAclAvailable(acl_list, callback) {
     var interval = 10; // ms
     var dialogs = document.getElementsByClassName('modal-dialog asset-sharing-dialog')
@@ -96,7 +96,7 @@ function whenAclAvailable(acl_list, callback) {
     }, interval);
 }
 
-
+// adapted from https://stackoverflow.com/questions/8618464/how-to-wait-for-another-js-to-load-to-proceed-operation by Wayne
 function whenDoneAvailable(callback) {
     var interval = 10; // ms
     var loadings = document.getElementsByClassName('modal-dialog asset-sharing-dialog loading')
