@@ -11,6 +11,9 @@
 // @grant none
 // ==/UserScript==
 
+// This script has inspired by gee_monky project (https://github.com/kongdd/gee_monkey) and please do check the original auther's work! The script on stackexchange (https://gis.stackexchange.com/questions/290771/batch-task-execution-in-google-earth-engine) and the idea of using userscript in gee_monky have led me to start to write this script and great thanks to Dongdong Kong (https://github.com/kongdd)!
+
+// I have learnt the usage of userscript from https://openuserjs.org/scripts/MAX30/TopAndDownButtonsEverywhere. I copied that script and addapted it to allow it work here.
 
 // create element
 function ce(n) { return document.createElement(n); } // end of function
