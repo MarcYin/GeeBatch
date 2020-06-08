@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name GeeBatchSubmitAndCancel
 // @description GEE batch submit and cancel
-// @version 1.3
+// @version 1.4
 // @updateURL https://raw.githubusercontent.com/MarcYin/GeeBatch/master/GeeBatchSubmitAndCancel.js
 // @author Marc Yin
 // @license GNU GENERAL PUBLIC LICENSE V3
@@ -11,9 +11,6 @@
 // @grant none
 // ==/UserScript==
 
-// This script has inspired by gee_monky project (https://github.com/kongdd/gee_monkey) and please do check the original auther's work! The script on stackexchange (https://gis.stackexchange.com/questions/290771/batch-task-execution-in-google-earth-engine) and the idea of using userscript in gee_monky have led me to start to write this script and great thanks to Dongdong Kong (https://github.com/kongdd)!
-
-// I have learnt the usage of userscript from https://openuserjs.org/scripts/MAX30/TopAndDownButtonsEverywhere. I copied that script and addapted it to allow it work here.
 
 // create element
 function ce(n) { return document.createElement(n); } // end of function
@@ -81,7 +78,7 @@ function clickPublic(){
   tasks.forEach(click4);
   setTimeout(whenDoneAvailable, 1000, clickDone);
 }
-// adapted from https://stackoverflow.com/questions/8618464/how-to-wait-for-another-js-to-load-to-proceed-operation by Wayne
+
 function whenAclAvailable(acl_list, callback) {
     var interval = 10; // ms
     var dialogs = document.getElementsByClassName('modal-dialog asset-sharing-dialog')
@@ -96,7 +93,7 @@ function whenAclAvailable(acl_list, callback) {
     }, interval);
 }
 
-// adapted from https://stackoverflow.com/questions/8618464/how-to-wait-for-another-js-to-load-to-proceed-operation by Wayne
+
 function whenDoneAvailable(callback) {
     var interval = 10; // ms
     var loadings = document.getElementsByClassName('modal-dialog asset-sharing-dialog loading')
@@ -202,7 +199,8 @@ function shareCSS(){
     s+='#cancel { position:fixed; right:310px; top:43px;   z-index:'+zIindex+'; height:26px; width:78px; cursor:pointer; background:url('+img_cancel+') no-repeat scroll 50% 50% rgba(0, 0, 0, 0); border-radius:5px 0 0 5px; margin-top:-24px; }';
     s+='#cancel_running { position:fixed; right:156px; top:43px;   z-index:'+zIindex+'; height:26px; width:142px; cursor:pointer; background:url('+img_cancel_running+') no-repeat scroll 50% 50% rgba(0, 0, 0, 0); border-radius:5px 0 0 5px; margin-top:-24px; }';
     s+='#SetAcl { position:fixed; right:490px; top:43px;   z-index:'+zIindex+'; height:26px; width: 114px; cursor:pointer; background: url('+img_acl+') no-repeat scroll 50% 50% rgba(0, 0, 0, 0); border-radius:5px 0 0 5px; margin-top:-24px; }';
-    s+='#SearchBar { position:fixed; right:620px; top:40px;   z-index:'+zIindex+'; height:26px; width:100px; cursor:pointer; background: #ddd no-repeat scroll 50% 50% rgba(0, 0, 0, 0); border-radius:0 0 0 0; margin-top:-24px; }';
+    // s+='#SearchBar { position:fixed; right:620px; top:40px;   z-index:'+zIindex+'; height:26px; width:100px; cursor:pointer; background: #ddd no-repeat scroll 50% 50% rgba(0, 0, 0, 0); border-radius:0 0 0 0; margin-top:-24px; }';
+    s+='#SearchBar { position:fixed; right:635px; top:43px;   z-index:'+zIindex+'; height:26px; width:120px; background: #fff none repeat scroll 0 0; border: medium none; border-radius: 5px; display: block; justify-content: space-between; margin: 0px 0; padding: 0px; transition: all 0.5s ease 0s ; margin-top:-24px;}'
     // button class
     s+='.play_btn { -webkit-transition-duration:0.5s linear; -o-transition-duration:0.5s linear; -moz-transition-duration:0.5s linear; transition-duration:0.5s linear; opacity:0.65; }';
     s+='.play_btn:hover { opacity:1; }';
