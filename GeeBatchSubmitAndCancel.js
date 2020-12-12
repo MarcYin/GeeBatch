@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name GeeBatchSubmitAndCancel
 // @description GEE batch submit and cancel
-// @version 1.4
+// @version 1.5
 // @updateURL https://raw.githubusercontent.com/MarcYin/GeeBatch/master/GeeBatchSubmitAndCancel.js
 // @author Marc Yin
 // @license GNU GENERAL PUBLIC LICENSE V3
@@ -57,7 +57,7 @@ function whenAvailable(callback) {
     var assets = document.getElementsByClassName('asset-id-root-select')
     var loaded = 0
     for (var i = 0; i < assets.length; i++) {
-        if (assets[i].textContent.includes("users/")){
+        if ((assets[i].textContent.includes("users/")) || (assets[i].textContent.includes("projects/")) ){
             loaded += 1
             console.log(assets[i].textContent)
         }
@@ -123,10 +123,43 @@ function submit() {
   var tasks = tasks1.concat(tasks2)
   // console.log(tasks)
   tasks.forEach(click1);
-  var assets = document.getElementsByClassName('asset-id-root-select')
-  if (assets.length > 0) {
+  var drive = document.getElementsByClassName('drive')
+
+  var drive_list = []
+  for (var i = 0; i < drive.length; i++){
+        if(drive[i].style.display === ""){
+            drive_list.push(drive[i])
+        }
+  }
+  if (drive_list.length > 0){
+      click_ok()
+  }
+  var assets = document.getElementsByClassName('asset')
+  //console.log(assets)
+  var assets_list = []
+  for (i = 0; i < assets.length; i++){
+        if(assets[i].style.display === ""){
+            assets_list.push(assets[i])
+        }
+  }
+  //console.log(assets_list)
+  if (assets_list.length > 0) {
       whenAvailable(click_ok)
-  }else{
+  }
+
+  var gcs = document.getElementsByClassName('gcs')
+  //console.log(assets)
+  var gcs_list = []
+  for (i = 0; i < gcs.length; i++){
+        if(gcs[i].style.display === ""){
+            if(gcs[i].childNodes[1].value === ""){
+              gcs[i].childNodes[1].value = 'gee'
+            }
+            gcs_list.push(gcs[i])
+        }
+  }
+  //console.log(assets_list)
+  if (gcs_list.length > 0) {
       click_ok()
   }
 
